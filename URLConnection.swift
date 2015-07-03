@@ -1,7 +1,6 @@
 //
-//  URLSession.swift
-//
-//  Copyright (c) 2015年 Evan3rd
+//  URLConnection.swift
+//  Copyright (c) 2015年 evan3rd. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +22,11 @@
 
 import Foundation
 
-private let _SomeManagerSharedInstance = URLSession()
+private let _SomeManagerSharedInstance = URLConnection()
 
-class URLSession: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDownloadDelegate {
+class URLConnection: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDownloadDelegate {
   
-  static let sharedInstance = URLSession()
+  static let sharedInstance = URLConnection()
   
   var _downloadCompletionBlock: ((data: NSData, url: NSURL) -> Void)?
   var _downloadProgressBlock: ((progress: Float) -> Void)?
@@ -61,7 +60,7 @@ class URLSession: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSUR
     let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
     let session = NSURLSession(configuration: configuration, delegate: self, delegateQueue: nil)
     let task = session.downloadTaskWithRequest(request)
-    
+
     task!.resume()
   }
   
@@ -75,7 +74,7 @@ class URLSession: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSUR
     
     task!.resume()
   }
-  
+
   // MARK: - NSURLSessionDelegate
   
   func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
